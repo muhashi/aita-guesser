@@ -3,6 +3,17 @@ import { MantineProvider, Container, Title, Button, Card, Text, Group, Stack, Ba
 import DATASET from './dataset.json';
 
 
+function shuffle(array) {
+  const newArray = [...array];
+
+	for (let index = newArray.length - 1; index > 0; index--) {
+		const newIndex = Math.floor(Math.random() * (index + 1));
+		[newArray[index], newArray[newIndex]] = [newArray[newIndex], newArray[index]];
+	}
+
+	return newArray;
+}
+
 function getDaysSinceEpoch() {
   const now = new Date();
   const epoch = new Date('2025-10-18');
@@ -23,14 +34,14 @@ function getDailyPosts() {
 }
 
 function getRandomPosts() {
-  const shuffled = [...DATASET].sort(() => Math.random() - 0.5);
+  const shuffled = shuffle(DATASET);
   return shuffled.slice(0, 3);
 }
 
 function Footer() {
   return (
-    <Text size="sm" c="dimmed" align="center">
-      Game by <Anchor href="https://muhashi.com" target="_blank" rel="noopener noreferrer">muhashi</Anchor>.
+    <Text size="sm" c="white" align="center">
+      Game by <Anchor c="white" underline="not-hover" href="https://muhashi.com" target="_blank" rel="noopener noreferrer">muhashi</Anchor>.
     </Text>
   );
 }
@@ -42,6 +53,16 @@ export default function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState([]);
   const [showResult, setShowResult] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [dailyCompleted, setDailyCompleted] = useState(() => {
+    const saved = localStorage.getItem('dailyCompleted');
+    const today = getDaysSinceEpoch();
+    if (saved) {
+      const data = JSON.parse(saved);
+      return data.day === today ? data.completed : false;
+    }
+    return false;
+  });
 
   const startGame = (mode) => {
     setGameMode(mode);
@@ -49,6 +70,7 @@ export default function App() {
     setCurrentIndex(0);
     setUserAnswers([]);
     setShowResult(false);
+    setCopied(false);
     setScreen('game');
   };
 
@@ -65,6 +87,11 @@ export default function App() {
       setCurrentIndex(currentIndex + 1);
       setShowResult(false);
     } else {
+      if (gameMode === 'daily') {
+        const today = getDaysSinceEpoch();
+        localStorage.setItem('dailyCompleted', JSON.stringify({ day: today, completed: true }));
+        setDailyCompleted(true);
+      }
       setScreen('results');
     }
   };
@@ -75,29 +102,71 @@ export default function App() {
     const text = `AITA Guesser\n${correctCount}/3 correct\n${emoji}\n\nPlay AITA Guesser: https://muhashi.com/aita-guesser`;
     
     navigator.clipboard.writeText(text);
-    alert('Results copied to clipboard!');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   if (screen === 'home') {
     return (
       <MantineProvider>
-        <Container size="sm" style={{ marginTop: '100px' }}>
-          <Stack align="center" gap="xl">
-            <Title order={1} style={{ fontSize: '3rem' }}>AITA Guesser</Title>
-            <Text size="lg" c="dimmed" ta="center">
-              Can you guess if the poster is the asshole?
-            </Text>
-            <Group gap="md" mt="xl">
-              <Button size="xl" onClick={() => startGame('daily')} variant="filled">
-                Daily Challenge
-              </Button>
-              <Button size="xl" onClick={() => startGame('quick')} variant="outline">
-                Quick Play
-              </Button>
-            </Group>
-            <Footer />
-          </Stack>
-        </Container>
+        <div style={{ 
+          minHeight: '100vh', 
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          padding: '20px'
+        }}>
+          <Container size="sm" style={{ marginTop: '100px' }}>
+            <Stack align="center" gap="xl">
+              <Title 
+                order={1} 
+                style={{ 
+                  fontSize: '4rem', 
+                  color: 'white',
+                  fontWeight: 800,
+                  textShadow: '4px 4px 8px rgba(0,0,0,0.3)',
+                  letterSpacing: '-2px'
+                }}
+              >
+                AITA Guesser
+              </Title>
+              <Text size="xl" c="white" ta="center" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.2)' }}>
+                Can you guess if the poster is the asshole?
+              </Text>
+              <Group gap="md" mt="xl">
+                <Button 
+                  size="xl" 
+                  onClick={() => startGame('daily')} 
+                  variant="filled"
+                  color="yellow"
+                  disabled={dailyCompleted}
+                  style={{ 
+                    boxShadow: '0 4px 14px rgba(0,0,0,0.25)',
+                    fontSize: '1.1rem',
+                    height: '60px',
+                    paddingLeft: '30px',
+                    paddingRight: '30px'
+                  }}
+                >
+                  {dailyCompleted ? '✓ Daily Complete' : '📅 Daily Challenge'}
+                </Button>
+                <Button 
+                  size="xl" 
+                  onClick={() => startGame('quick')} 
+                  variant="white"
+                  style={{ 
+                    boxShadow: '0 4px 14px rgba(0,0,0,0.25)',
+                    fontSize: '1.1rem',
+                    height: '60px',
+                    paddingLeft: '30px',
+                    paddingRight: '30px'
+                  }}
+                >
+                  🎲 Quick Play
+                </Button>
+              </Group>
+              <Footer />
+            </Stack>
+          </Container>
+        </div>
       </MantineProvider>
     );
   }
@@ -107,66 +176,100 @@ export default function App() {
     
     return (
       <MantineProvider>
-        <Container size="md" style={{ marginTop: '40px' }}>
-          <Stack gap="md">
-            <Group justify="space-between">
-              <Badge size="lg">{gameMode === 'daily' ? 'Daily Challenge' : 'Quick Play'}</Badge>
-              <Badge size="lg" variant="outline">Post {currentIndex + 1} of 3</Badge>
-            </Group>
-            
-            <Card shadow="sm" padding="lg" radius="md" withBorder>
-              <Stack gap="md">
-                <Title order={2} size="h3">{currentPost.title}</Title>
-                <Text style={{ whiteSpace: 'pre-wrap' }} dangerouslySetInnerHTML={{ __html: currentPost.text }} />
-              </Stack>
-            </Card>
-
-            {!showResult ? (
-              <Group justify="center" gap="xl" mt="xl">
-                <Button size="lg" color="red" onClick={() => handleGuess('YTA')}>
-                  YTA (You're The Asshole)
-                </Button>
-                <Button size="lg" color="green" onClick={() => handleGuess('NTA')}>
-                  NTA (Not The Asshole)
-                </Button>
+        <div style={{ 
+          minHeight: '100vh', 
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          padding: '20px'
+        }}>
+          <Container size="md" style={{ marginTop: '40px' }}>
+            <Stack gap="md">
+              <Group justify="space-between">
+                <Badge size="lg" color="yellow" variant="filled" style={{ fontSize: '0.9rem' }}>
+                  {gameMode === 'daily' ? '📅 Daily Challenge' : '🎲 Quick Play'}
+                </Badge>
+                <Badge size="lg" variant="filled" color="white" c="dark" style={{ fontSize: '0.9rem' }}>
+                  Post {currentIndex + 1} of 3
+                </Badge>
               </Group>
-            ) : (
-              <Paper p="xl" radius="md" withBorder style={{ backgroundColor: userAnswers[userAnswers.length - 1].correct ? '#d4edda' : '#f8d7da' }}>
-                <Stack gap="md" align="center">
-                  <Title order={3}>
-                    {userAnswers[userAnswers.length - 1].correct ? '✅ Correct!' : '❌ Incorrect'}
-                  </Title>
-                  <Text size="lg">
-                    The verdict was: <strong>{currentPost.verdict}</strong>
-                  </Text>
-                  <Button 
-                    component="a" 
-                    href={`https://redd.it/${currentPost.id}`}
-                    target="_blank"
-                    variant="subtle"
-                  >
-                    View Original Post
-                  </Button>
-                  <Button size="lg" onClick={nextPost} mt="md">
-                    {currentIndex < posts.length - 1 ? 'Next Post' : 'See Results'}
-                  </Button>
+              
+              <Card shadow="xl" padding="lg" radius="md" withBorder style={{ backgroundColor: 'white' }}>
+                <Stack gap="md">
+                  <Title order={2} size="h3">{currentPost.title}</Title>
+                  <Text style={{ whiteSpace: 'pre-wrap' }} dangerouslySetInnerHTML={{ __html: currentPost.text }} />
                 </Stack>
+              </Card>
+
+              {!showResult ? (
+                <Group justify="center" gap="xl" mt="xl">
+                  <Button 
+                    size="lg" 
+                    color="red" 
+                    onClick={() => handleGuess('YTA')}
+                    style={{ 
+                      boxShadow: '0 4px 14px rgba(0,0,0,0.25)',
+                      height: '60px',
+                      fontSize: '1.1rem',
+                      paddingLeft: '30px',
+                      paddingRight: '30px'
+                    }}
+                  >
+                    YTA (You're The Asshole)
+                  </Button>
+                  <Button 
+                    size="lg" 
+                    color="green" 
+                    onClick={() => handleGuess('NTA')}
+                    style={{ 
+                      boxShadow: '0 4px 14px rgba(0,0,0,0.25)',
+                      height: '60px',
+                      fontSize: '1.1rem',
+                      paddingLeft: '30px',
+                      paddingRight: '30px'
+                    }}
+                  >
+                    NTA (Not The Asshole)
+                  </Button>
+                </Group>
+              ) : (
+                <Paper p="xl" radius="md" withBorder style={{ backgroundColor: userAnswers[userAnswers.length - 1].correct ? '#d4edda' : '#f8d7da' }}>
+                  <Stack gap="md" align="center">
+                    <Title order={3}>
+                      {userAnswers[userAnswers.length - 1].correct ? '✅ Correct!' : '❌ Incorrect'}
+                    </Title>
+                    <Text size="lg">
+                      The verdict was: <strong>{currentPost.verdict}</strong>
+                    </Text>
+                    <Button 
+                      component="a" 
+                      href={`https://redd.it/${currentPost.id}`}
+                      target="_blank"
+                      variant="subtle"
+                    >
+                      View Original Post
+                    </Button>
+                    <Button size="lg" onClick={nextPost} mt="md">
+                      {currentIndex < posts.length - 1 ? 'Next Post' : 'See Results'}
+                    </Button>
+                  </Stack>
+                </Paper>
+              )}
+              <Paper p="xl" radius="md" style={{ backgroundColor: '#f8f9fa' }}>
+                <Text size="sm" c="dimmed" align="center">
+                  <strong>Glossary:</strong>
+                  <br />
+                  <em>AITA:</em> Am I The Asshole?
+                  <br />
+                  <em>WIBTA:</em> Would I Be The Asshole?
+                  <br />
+                  <em>YTA:</em> You're The Asshole
+                  <br />
+                  <em>NTA:</em> Not The Asshole
+                </Text>
               </Paper>
-            )}
-            <Paper p="md" mt="xl" radius="md" style={{ backgroundColor: '#f8f9fa' }}>
-              <Text size="sm" c="dimmed" align="center">
-                <strong>Glossary:</strong>
-                <br />
-                <em>YTA:</em> You're The Asshole
-                <br />
-                <em>NTA:</em> Not The Asshole
-                <br />
-                <em>WIBTA:</em> Would I Be The Asshole
-              </Text>
-            </Paper>
-            <Footer />
-          </Stack>
-        </Container>
+              <Footer />
+            </Stack>
+          </Container>
+        </div>
       </MantineProvider>
     );
   }
@@ -176,45 +279,95 @@ export default function App() {
     
     return (
       <MantineProvider>
-        <Container size="md" style={{ marginTop: '40px' }}>
-          <Stack gap="xl" align="center">
-            <Title order={1}>Game Complete!</Title>
-            <Title order={2}>You got {correctCount} out of 3 correct</Title>
-            
-            <Stack gap="md" style={{ width: '100%' }}>
-              {userAnswers.map((answer, idx) => (
-                <Card key={idx} shadow="sm" padding="lg" radius="md" withBorder>
-                  <Group justify="space-between">
-                    <Text fw={500}>{answer.post.title}</Text>
-                    <Badge color={answer.correct ? 'green' : 'red'}>
-                      {answer.correct ? '✅ Correct' : '❌ Wrong'}
-                    </Badge>
-                  </Group>
-                  <Text size="sm" c="dimmed" mt="xs">
-                    Your guess: {answer.guess} | Actual: {answer.post.verdict}
-                  </Text>
-                </Card>
-              ))}
-            </Stack>
+        <div style={{ 
+          minHeight: '100vh', 
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          padding: '20px'
+        }}>
+          <Container size="md" style={{ marginTop: '40px' }}>
+            <Stack gap="xl" align="center">
+              <Title order={1} c="white" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>
+                Game Complete!
+              </Title>
+              <Title order={2} c="white" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>
+                You got {correctCount} out of 3 correct
+              </Title>
+              
+              <Stack gap="md" style={{ width: '100%' }}>
+                {userAnswers.map((answer, idx) => (
+                  <Card key={idx} shadow="xl" padding="lg" radius="md" withBorder style={{ backgroundColor: 'white' }}>
+                    <Group justify="space-between">
+                      <Text fw={500}>{answer.post.title}</Text>
+                      <Badge color={answer.correct ? 'green' : 'red'}>
+                        {answer.correct ? '✅ Correct' : '❌ Wrong'}
+                      </Badge>
+                    </Group>
+                    <Text size="sm" c="dimmed" mt="xs">
+                      Your guess: {answer.guess} | Actual: {answer.post.verdict}
+                    </Text>
+                  </Card>
+                ))}
+              </Stack>
 
-            <Group gap="md" mt="xl">
-              {gameMode === 'daily' && (
-                <Button size="lg" onClick={shareResults} variant="filled">
-                  Share Results
-                </Button>
-              )}
-              <Button size="lg" onClick={() => setScreen('home')} variant="outline">
-                Back to Home
-              </Button>
-              {gameMode === 'quick' && (
-                <Button size="lg" onClick={() => startGame('quick')}>
-                  Play Again
-                </Button>
-              )}
-            </Group>
-            <Footer />
-          </Stack>
-        </Container>
+              <Group gap="md" mt="xl">
+                {gameMode === 'daily' ? (
+                  <>
+                    <Button 
+                      size="lg" 
+                      onClick={shareResults} 
+                      variant="filled"
+                      color="yellow"
+                      style={{ 
+                        boxShadow: '0 4px 14px rgba(0,0,0,0.25)',
+                        fontSize: '1.1rem'
+                      }}
+                    >
+                      {copied ? '✓ Copied!' : 'Share Results'}
+                    </Button>
+                    <Button 
+                      size="lg" 
+                      onClick={() => startGame('quick')} 
+                      variant="white"
+                      style={{ 
+                        boxShadow: '0 4px 14px rgba(0,0,0,0.25)',
+                        fontSize: '1.1rem'
+                      }}
+                    >
+                      Play Quick Mode
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button 
+                      size="lg" 
+                      onClick={() => setScreen('home')} 
+                      variant="white"
+                      style={{ 
+                        boxShadow: '0 4px 14px rgba(0,0,0,0.25)',
+                        fontSize: '1.1rem'
+                      }}
+                    >
+                      Back to Home
+                    </Button>
+                    <Button 
+                      size="lg" 
+                      onClick={() => startGame('quick')}
+                      variant="filled"
+                      color="yellow"
+                      style={{ 
+                        boxShadow: '0 4px 14px rgba(0,0,0,0.25)',
+                        fontSize: '1.1rem'
+                      }}
+                    >
+                      Play Again
+                    </Button>
+                  </>
+                )}
+              </Group>
+              <Footer />
+            </Stack>
+          </Container>
+        </div>
       </MantineProvider>
     );
   }
