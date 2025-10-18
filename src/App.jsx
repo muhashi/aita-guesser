@@ -120,7 +120,10 @@ export default function App() {
                 order={1} 
                 style={{ 
                   fontSize: '4rem', 
-                  color: '#2c3e50',
+                  background: 'linear-gradient(135deg, #0061ff 0%, #00A5B8 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
                   fontWeight: 800,
                   textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
                   letterSpacing: '-2px'
@@ -128,8 +131,11 @@ export default function App() {
               >
                 AITA Guesser
               </Title>
-              <Text size="xl" c="dimmed" ta="center">
+              <Text size="xl" c="dimmed" ta="center" style={{ fontWeight: 500 }}>
                 Can you guess if the poster is the asshole?
+              </Text>
+              <Text size="lg" c="dimmed" ta="center">
+                Guess what the verdict is for over 1000 popular r/AmItheAsshole Reddit posts.
               </Text>
               <Group gap="md" mt="xl">
                 <Button 
