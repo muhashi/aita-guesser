@@ -40,8 +40,8 @@ function getRandomPosts() {
 
 function Footer() {
   return (
-    <Text size="sm" c="white" align="center">
-      Game by <Anchor c="white" underline="not-hover" href="https://muhashi.com" target="_blank" rel="noopener noreferrer">muhashi</Anchor>.
+    <Text size="sm" c="dimmed" ta="center" pb="xl">
+      Game by <Anchor c="dimmed" style={{ fontWeight: 600 }} href="https://muhashi.com" target="_blank" rel="noopener noreferrer">muhashi</Anchor>.
     </Text>
   );
 }
@@ -111,7 +111,7 @@ export default function App() {
       <MantineProvider>
         <div style={{ 
           minHeight: '100vh', 
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          backgroundColor: '#f5f5f5',
           padding: '20px'
         }}>
           <Container size="sm" style={{ marginTop: '100px' }}>
@@ -120,15 +120,15 @@ export default function App() {
                 order={1} 
                 style={{ 
                   fontSize: '4rem', 
-                  color: 'white',
+                  color: '#2c3e50',
                   fontWeight: 800,
-                  textShadow: '4px 4px 8px rgba(0,0,0,0.3)',
+                  textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
                   letterSpacing: '-2px'
                 }}
               >
                 AITA Guesser
               </Title>
-              <Text size="xl" c="white" ta="center" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.2)' }}>
+              <Text size="xl" c="dimmed" ta="center">
                 Can you guess if the poster is the asshole?
               </Text>
               <Group gap="md" mt="xl">
@@ -136,10 +136,10 @@ export default function App() {
                   size="xl" 
                   onClick={() => startGame('daily')} 
                   variant="filled"
-                  color="yellow"
+                  color="orange"
                   disabled={dailyCompleted}
                   style={{ 
-                    boxShadow: '0 4px 14px rgba(0,0,0,0.25)',
+                    boxShadow: '0 4px 14px rgba(0,0,0,0.15)',
                     fontSize: '1.1rem',
                     height: '60px',
                     paddingLeft: '30px',
@@ -151,13 +151,15 @@ export default function App() {
                 <Button 
                   size="xl" 
                   onClick={() => startGame('quick')} 
-                  variant="white"
+                  variant="outline"
+                  color="dark"
                   style={{ 
-                    boxShadow: '0 4px 14px rgba(0,0,0,0.25)',
+                    boxShadow: '0 4px 14px rgba(0,0,0,0.1)',
                     fontSize: '1.1rem',
                     height: '60px',
                     paddingLeft: '30px',
-                    paddingRight: '30px'
+                    paddingRight: '30px',
+                    backgroundColor: 'white'
                   }}
                 >
                   🎲 Quick Play
@@ -178,21 +180,21 @@ export default function App() {
       <MantineProvider>
         <div style={{ 
           minHeight: '100vh', 
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          backgroundColor: '#f5f5f5',
           padding: '20px'
         }}>
           <Container size="md" style={{ marginTop: '40px' }}>
             <Stack gap="md">
               <Group justify="space-between">
-                <Badge size="lg" color="yellow" variant="filled" style={{ fontSize: '0.9rem' }}>
+                <Badge size="lg" color="orange" variant="filled" style={{ fontSize: '0.9rem' }}>
                   {gameMode === 'daily' ? '📅 Daily Challenge' : '🎲 Quick Play'}
                 </Badge>
-                <Badge size="lg" variant="filled" color="white" c="dark" style={{ fontSize: '0.9rem' }}>
+                <Badge size="lg" variant="filled" color="gray" style={{ fontSize: '0.9rem' }}>
                   Post {currentIndex + 1} of 3
                 </Badge>
               </Group>
               
-              <Card shadow="xl" padding="lg" radius="md" withBorder style={{ backgroundColor: 'white' }}>
+              <Card shadow="md" padding="lg" radius="md" withBorder style={{ backgroundColor: 'white' }}>
                 <Stack gap="md">
                   <Title order={2} size="h3">{currentPost.title}</Title>
                   <Text style={{ whiteSpace: 'pre-wrap' }} dangerouslySetInnerHTML={{ __html: currentPost.text }} />
@@ -206,7 +208,7 @@ export default function App() {
                     color="red" 
                     onClick={() => handleGuess('YTA')}
                     style={{ 
-                      boxShadow: '0 4px 14px rgba(0,0,0,0.25)',
+                      boxShadow: '0 4px 14px rgba(0,0,0,0.15)',
                       height: '60px',
                       fontSize: '1.1rem',
                       paddingLeft: '30px',
@@ -220,7 +222,7 @@ export default function App() {
                     color="green" 
                     onClick={() => handleGuess('NTA')}
                     style={{ 
-                      boxShadow: '0 4px 14px rgba(0,0,0,0.25)',
+                      boxShadow: '0 4px 14px rgba(0,0,0,0.15)',
                       height: '60px',
                       fontSize: '1.1rem',
                       paddingLeft: '30px',
@@ -253,8 +255,8 @@ export default function App() {
                   </Stack>
                 </Paper>
               )}
-              <Paper p="xl" radius="md" style={{ backgroundColor: '#f8f9fa' }}>
-                <Text size="sm" c="dimmed" align="center">
+              <Paper p="xl" radius="md" style={{ backgroundColor: 'white', border: '1px solid #e9ecef' }}>
+                <Text size="sm" c="dimmed" ta="center">
                   <strong>Glossary:</strong>
                   <br />
                   <em>AITA:</em> Am I The Asshole?
@@ -281,21 +283,21 @@ export default function App() {
       <MantineProvider>
         <div style={{ 
           minHeight: '100vh', 
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          backgroundColor: '#f5f5f5',
           padding: '20px'
         }}>
           <Container size="md" style={{ marginTop: '40px' }}>
             <Stack gap="xl" align="center">
-              <Title order={1} c="white" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>
+              <Title order={1} c="dark" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.1)' }}>
                 Game Complete!
               </Title>
-              <Title order={2} c="white" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>
+              <Title order={2} c="dark" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.1)' }}>
                 You got {correctCount} out of 3 correct
               </Title>
               
               <Stack gap="md" style={{ width: '100%' }}>
                 {userAnswers.map((answer, idx) => (
-                  <Card key={idx} shadow="xl" padding="lg" radius="md" withBorder style={{ backgroundColor: 'white' }}>
+                  <Card key={idx} shadow="md" padding="lg" radius="md" withBorder style={{ backgroundColor: 'white' }}>
                     <Group justify="space-between">
                       <Text fw={500}>{answer.post.title}</Text>
                       <Badge color={answer.correct ? 'green' : 'red'}>
@@ -316,9 +318,9 @@ export default function App() {
                       size="lg" 
                       onClick={shareResults} 
                       variant="filled"
-                      color="yellow"
+                      color="orange"
                       style={{ 
-                        boxShadow: '0 4px 14px rgba(0,0,0,0.25)',
+                        boxShadow: '0 4px 14px rgba(0,0,0,0.15)',
                         fontSize: '1.1rem'
                       }}
                     >
@@ -327,10 +329,12 @@ export default function App() {
                     <Button 
                       size="lg" 
                       onClick={() => startGame('quick')} 
-                      variant="white"
+                      variant="outline"
+                      color="dark"
                       style={{ 
-                        boxShadow: '0 4px 14px rgba(0,0,0,0.25)',
-                        fontSize: '1.1rem'
+                        boxShadow: '0 4px 14px rgba(0,0,0,0.1)',
+                        fontSize: '1.1rem',
+                        backgroundColor: 'white'
                       }}
                     >
                       Play Quick Mode
@@ -341,10 +345,12 @@ export default function App() {
                     <Button 
                       size="lg" 
                       onClick={() => setScreen('home')} 
-                      variant="white"
+                      variant="outline"
+                      color="dark"
                       style={{ 
-                        boxShadow: '0 4px 14px rgba(0,0,0,0.25)',
-                        fontSize: '1.1rem'
+                        boxShadow: '0 4px 14px rgba(0,0,0,0.1)',
+                        fontSize: '1.1rem',
+                        backgroundColor: 'white'
                       }}
                     >
                       Back to Home
@@ -353,9 +359,9 @@ export default function App() {
                       size="lg" 
                       onClick={() => startGame('quick')}
                       variant="filled"
-                      color="yellow"
+                      color="orange"
                       style={{ 
-                        boxShadow: '0 4px 14px rgba(0,0,0,0.25)',
+                        boxShadow: '0 4px 14px rgba(0,0,0,0.15)',
                         fontSize: '1.1rem'
                       }}
                     >
