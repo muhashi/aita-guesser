@@ -17,7 +17,7 @@ function shuffle(array) {
 
 function getDaysSinceEpoch() {
   const now = new Date();
-  const epoch = new Date('2025-10-18');
+  const epoch = new Date(2025, 9, 18); // October 18, 2025
   const diff = now - epoch;
   return Math.floor(diff / (1000 * 60 * 60 * 24));
 }
