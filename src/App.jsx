@@ -293,6 +293,9 @@ export default function App() {
                     >
                       View Original Post
                     </Button>
+                    <Text size="sm" c="dimmed" ta="center">
+                      <strong>Note:</strong> The verdict on Reddit may have changed since the data was originally retrieved.
+                    </Text>
                     <Button size="lg" onClick={nextPost} mt="md">
                       {currentIndex < posts.length - 1 ? 'Next Post' : 'See Results'}
                     </Button>
@@ -306,10 +309,6 @@ export default function App() {
                   <em>AITA:</em> Am I The Asshole?
                   <br />
                   <em>WIBTA:</em> Would I Be The Asshole?
-                  <br />
-                  <em>YTA:</em> You're The Asshole
-                  <br />
-                  <em>NTA:</em> Not The Asshole
                 </Text>
               </Paper>
               <Footer />
