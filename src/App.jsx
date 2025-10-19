@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MantineProvider, Container, Title, Button, Card, Text, Group, Stack, Badge, Paper, Anchor } from '@mantine/core';
 import DATASET from './dataset.json';
+import ConfettiExplosion from 'react-confetti-blast';
 
 
 function shuffle(array) {
@@ -324,6 +325,13 @@ export default function App() {
     
     return (
       <MantineProvider>
+        { correctCount === 3 && <ConfettiExplosion
+          style={{
+            position: 'absolute', top: '30vh', left: '50vw',
+          }}
+          duration={3000}
+          force={0.6}
+        />}
         <div style={{ 
           minHeight: '100vh', 
           backgroundColor: '#f5f5f5',
