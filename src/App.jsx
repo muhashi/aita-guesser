@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MantineProvider, Container, Title, Button, Card, Text, Group, Stack, Badge, Paper, Anchor } from '@mantine/core';
 import DATASET from './dataset.json';
 
@@ -37,6 +37,58 @@ function getRandomPosts() {
   const shuffled = shuffle(DATASET);
   return shuffled.slice(0, 3);
 }
+
+const AnimatedTitle = () => {
+  const [animate, setAnimate] = useState(false);
+  const words = ['AITA', 'Guesser'];
+  const colors = ['#e55643', '#2b9f5e'];
+
+  useEffect(() => {
+    setAnimate(true);
+  }, []);
+
+  return (
+    <div style={{ 
+      position: 'relative',
+      margin: '0 auto',
+      textAlign: 'center',
+      cursor: 'default',
+      userSelect: 'none'
+    }}>
+      {words.map((word, wordIndex) => (
+        <div key={wordIndex} style={{
+          display: 'block',
+          position: 'relative',
+          left: '50%',
+          transform: 'translateX(-50%) rotate(-5deg)',
+          marginBottom: wordIndex === 0 ? '-5px' : '0'
+        }}>
+          {word.split('').map((char, charIndex) => (
+            <span
+              key={charIndex}
+              style={{
+                display: 'inline-block',
+                fontSize: '4rem',
+                fontWeight: 800,
+                letterSpacing: '2px',
+                color: colors[wordIndex],
+                textShadow: '#533d4a 1px 1px, #533d4a 2px 2px, #533d4a 3px 3px, #533d4a 4px 4px, #533d4a 5px 5px, #533d4a 6px 6px',
+                transform: 'skew(-5deg)',
+                opacity: animate ? 1 : 0,
+                position: 'relative',
+                bottom: animate ? 0 : '-80px',
+                transition: `all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) ${charIndex * 0.05}s`,
+                minWidth: char === ' ' ? '20px' : '10px'
+              }}
+            >
+              {char}
+            </span>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+};
 
 function Footer() {
   return (
@@ -116,26 +168,12 @@ export default function App() {
         }}>
           <Container size="sm" style={{ marginTop: '100px' }}>
             <Stack align="center" gap="xl">
-              <Title 
-                order={1} 
-                style={{ 
-                  fontSize: '4rem', 
-                  background: 'linear-gradient(135deg, #0061ff 0%, #00A5B8 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  fontWeight: 800,
-                  textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
-                  letterSpacing: '-2px'
-                }}
-              >
-                AITA Guesser
-              </Title>
-              <Text size="xl" c="dimmed" ta="center" style={{ fontWeight: 500 }}>
+              <AnimatedTitle />
+              <Text size="xl" ta="center" style={{ fontWeight: 500 }}>
                 Can you guess if the poster is the asshole?
               </Text>
-              <Text size="lg" c="dimmed" ta="center">
-                Guess what the verdict is for over 1000 popular r/AmItheAsshole Reddit posts.
+              <Text size="lg" ta="center">
+                Guess the verdict for over 1000 popular r/AmItheAsshole Reddit posts.
               </Text>
               <Group gap="md" mt="xl">
                 <Button 
