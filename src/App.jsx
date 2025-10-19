@@ -147,6 +147,10 @@ export default function App() {
       }
       setScreen('results');
     }
+    window.scrollTo({
+      top: 0,
+      left: 0,
+    });
   };
 
   const shareResults = () => {
@@ -176,7 +180,7 @@ export default function App() {
               <Text size="lg" ta="center">
                 Guess the verdict for over 1000 popular r/AmItheAsshole Reddit posts.
               </Text>
-              <Group gap="md" mt="xl">
+              <Group gap="md" mt="xl" justify='center'>
                 <Button 
                   size="xl" 
                   onClick={() => startGame('daily')} 
@@ -362,7 +366,7 @@ export default function App() {
                 ))}
               </Stack>
 
-              <Group gap="md" mt="xl">
+              <Group gap="md" mt="xl" justify="center">
                 {gameMode === 'daily' ? (
                   <>
                     <Button 
