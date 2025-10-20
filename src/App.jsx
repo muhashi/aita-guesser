@@ -347,7 +347,7 @@ export default function App() {
                 Game Complete!
               </Title>
               <Title order={2} c="dark" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.1)' }}>
-                You got {correctCount} out of 3 correct
+                You got {correctCount} out of 3 correct{correctCount === 3 ? ' 🎉' : ''}{correctCount === 0 ? ' 💩' : ''}
               </Title>
               
               <Stack gap="md" style={{ width: '100%' }}>
