@@ -174,7 +174,7 @@ export default function App() {
           <Container size="sm" style={{ marginTop: '100px' }}>
             <Stack align="center" gap="xl">
               <AnimatedTitle />
-              <Text size="xl" ta="center" style={{ fontWeight: 500 }}>
+              <Text size="xl" ta="center" style={{ fontWeight: 600 }}>
                 Can you guess if the poster is the asshole?
               </Text>
               <Text size="lg" ta="center">
