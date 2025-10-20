@@ -353,8 +353,17 @@ export default function App() {
               <Stack gap="md" style={{ width: '100%' }}>
                 {userAnswers.map((answer, idx) => (
                   <Card key={idx} shadow="md" padding="lg" radius="md" withBorder style={{ backgroundColor: 'white' }}>
-                    <Group justify="space-between">
-                      <Text fw={500}>{answer.post.title}</Text>
+                    <Group justify="space-between" align="flex-start">
+                      <div style={{ flex: 1 }}>
+                        <Anchor 
+                          href={`https://redd.it/${answer.post.id}`}
+                          target="_blank"
+                          c="dark"
+                          style={{ textDecoration: 'none' }}
+                        >
+                          <Text fw={500} style={{ textDecoration: 'underline' }}>{answer.post.title}</Text>
+                        </Anchor>
+                      </div>
                       <Badge color={answer.correct ? 'green' : 'red'}>
                         {answer.correct ? '✅ Correct' : '❌ Wrong'}
                       </Badge>
