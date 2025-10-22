@@ -17,9 +17,21 @@ function shuffle(array) {
 
 function getDaysSinceEpoch() {
   const now = new Date();
-  const epoch = new Date(2025, 9, 18); // October 18, 2025
-  const diff = now - epoch;
+  const epoch = new Date(Date.UTC(2025, 9, 18)); // October 18, 2025 UTC
+  const nowUTC = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+  const diff = nowUTC - epoch.getTime();
   return Math.floor(diff / (1000 * 60 * 60 * 24));
+}
+
+function getTimeUntilNextDaily() {
+  const now = new Date();
+  const tomorrow = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1));
+  const diff = tomorrow.getTime() - now.getTime();
+
+  const hours = Math.floor(diff / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+  return { hours, minutes };
 }
 
 function getDailyPosts() {
@@ -88,6 +100,24 @@ const AnimatedTitle = () => {
         </div>
       ))}
     </div>
+  );
+};
+
+const CountdownTimer = () => {
+  const [timeLeft, setTimeLeft] = useState(getTimeUntilNextDaily());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(getTimeUntilNextDaily());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+      <Text size="md" c="dimmed" ta="center">
+        Next round in {String(timeLeft.hours).padStart(2, '0')}h {String(timeLeft.minutes).padStart(2, '0')}m
+      </Text>
   );
 };
 
@@ -189,13 +219,13 @@ export default function App() {
                   disabled={dailyCompleted}
                   style={{ 
                     boxShadow: '0 4px 14px rgba(0,0,0,0.15)',
-                    fontSize: '1.1rem',
+                    fontSize: dailyCompleted ? '1rem' : '1.1rem',
                     height: '60px',
                     paddingLeft: '30px',
                     paddingRight: '30px'
                   }}
                 >
-                  {dailyCompleted ? '✓ Daily Complete' : '📅 Daily Challenge'}
+                  {dailyCompleted ? `Next daily in ${String(getTimeUntilNextDaily().hours).padStart(2, '0')}h ${String(getTimeUntilNextDaily().minutes).padStart(2, '0')}m` : '📅 Daily Challenge'}
                 </Button>
                 <Button 
                   size="xl" 
@@ -349,6 +379,8 @@ export default function App() {
               <Title order={2} c="dark" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.1)' }}>
                 You got {correctCount} out of 3 correct{correctCount === 3 ? ' 🎉' : ''}{correctCount === 0 ? ' 💩' : ''}
               </Title>
+
+              {gameMode === 'daily' && <CountdownTimer />}
               
               <Stack gap="md" style={{ width: '100%' }}>
                 {userAnswers.map((answer, idx) => (
@@ -375,7 +407,7 @@ export default function App() {
                 ))}
               </Stack>
 
-              <Group gap="md" mt="xl" justify="center">
+              <Group gap="md" justify="center">
                 {gameMode === 'daily' ? (
                   <>
                     <Button 
@@ -408,6 +440,18 @@ export default function App() {
                   <>
                     <Button 
                       size="lg" 
+                      onClick={() => startGame('quick')}
+                      variant="filled"
+                      color="orange"
+                      style={{ 
+                        boxShadow: '0 4px 14px rgba(0,0,0,0.15)',
+                        fontSize: '1.1rem'
+                      }}
+                    >
+                      Play Again
+                    </Button>
+                    <Button 
+                      size="lg" 
                       onClick={() => setScreen('home')} 
                       variant="outline"
                       color="dark"
@@ -418,18 +462,6 @@ export default function App() {
                       }}
                     >
                       Back to Home
-                    </Button>
-                    <Button 
-                      size="lg" 
-                      onClick={() => startGame('quick')}
-                      variant="filled"
-                      color="orange"
-                      style={{ 
-                        boxShadow: '0 4px 14px rgba(0,0,0,0.15)',
-                        fontSize: '1.1rem'
-                      }}
-                    >
-                      Play Again
                     </Button>
                   </>
                 )}
