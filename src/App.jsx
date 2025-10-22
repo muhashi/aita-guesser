@@ -186,7 +186,7 @@ export default function App() {
   const shareResults = () => {
     const correctCount = userAnswers.filter(a => a.correct).length;
     const emoji = userAnswers.map(a => a.correct ? '✅' : '❌').join(' ');
-    const text = `AITA Guesser\n${correctCount}/3 correct\n${emoji}\n\nPlay AITA Guesser: https://muhashi.com/aita-guesser`;
+    const text = `AITA Guesser ${getDaysSinceEpoch()} ${correctCount}/3\n${emoji}\n\nPlay AITA Guesser: https://muhashi.com/aita-guesser`;
     
     navigator.clipboard.writeText(text);
     setCopied(true);
