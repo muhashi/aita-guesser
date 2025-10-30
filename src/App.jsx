@@ -116,16 +116,21 @@ const CountdownTimer = () => {
 
   return (
       <Text size="md" c="dimmed" ta="center">
-        Next round in {String(timeLeft.hours).padStart(2, '0')}h {String(timeLeft.minutes).padStart(2, '0')}m
+        Next round in {String(timeLeft.hours)}h {String(timeLeft.minutes)}m
       </Text>
   );
 };
 
 function Footer() {
   return (
-    <Text size="sm" c="dimmed" ta="center" pb="xl">
-      Game by <Anchor c="dimmed" style={{ fontWeight: 600 }} href="https://muhashi.com" target="_blank" rel="noopener noreferrer">muhashi</Anchor>.
-    </Text>
+    <Group gap="md" pb="xl" justify="center">
+      <Text size="sm" c="dimmed" ta="center">
+        Game by <Anchor c="dimmed" style={{ fontWeight: 600 }} href="https://muhashi.com" target="_blank" rel="noopener noreferrer">muhashi</Anchor>.
+      </Text>
+      <a href='https://ko-fi.com/D1D5V1DSF' target='_blank'>
+        <img height='36' style={{border: 0, height: '36px'}} src='https://storage.ko-fi.com/cdn/kofi6.png?v=3' alt='Buy Me a Coffee at ko-fi.com' />
+      </a>
+    </Group>
   );
 }
 
@@ -225,7 +230,7 @@ export default function App() {
                     paddingRight: '30px'
                   }}
                 >
-                  {dailyCompleted ? `Next daily in ${String(getTimeUntilNextDaily().hours).padStart(2, '0')}h ${String(getTimeUntilNextDaily().minutes).padStart(2, '0')}m` : '📅 Daily Challenge'}
+                  {dailyCompleted ? `Next daily in ${String(getTimeUntilNextDaily().hours)}h ${String(getTimeUntilNextDaily().minutes)}m` : '📅 Daily Challenge'}
                 </Button>
                 <Button 
                   size="xl" 
