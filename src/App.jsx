@@ -267,7 +267,7 @@ export default function App() {
           backgroundColor: '#f5f5f5',
           padding: '20px'
         }}>
-          <Container size="md" style={{ marginTop: '40px' }}>
+          <Container size="md" style={{ marginTop: '15px' }}>
             <Stack gap="md">
               <Group justify="space-between">
                 <Badge size="lg" color="orange" variant="filled" style={{ fontSize: '0.9rem' }}>
@@ -375,7 +375,7 @@ export default function App() {
           backgroundColor: '#f5f5f5',
           padding: '20px'
         }}>
-          <Container size="md" style={{ marginTop: '40px' }}>
+          <Container size="md" style={{ marginTop: '15px' }}>
             <Stack gap="xl" align="center">
               <Title order={1} c="dark" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.1)' }}>
                 Game Complete!
