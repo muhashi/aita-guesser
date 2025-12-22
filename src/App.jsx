@@ -123,7 +123,7 @@ const CountdownTimer = () => {
 
 function Footer() {
   return (
-    <Group gap="md" pb="xl" justify="center">
+    <Group gap="md" pt="md" pb="xl" justify="center">
       <Text size="sm" c="dimmed" ta="center">
         Game by <Anchor c="dimmed" style={{ fontWeight: 600 }} href="https://muhashi.com" target="_blank" rel="noopener noreferrer">muhashi</Anchor>.
       </Text>
@@ -278,10 +278,10 @@ export default function App() {
                 </Badge>
               </Group>
               
-              <Card shadow="md" padding="lg" radius="md" withBorder style={{ backgroundColor: 'white' }}>
-                <Stack gap="md">
+              <Card shadow="md" padding="lg" pb="xs" radius="md" withBorder style={{ backgroundColor: 'white' }}>
+                <Stack gap="0">
                   <Title order={2} size="h3">{currentPost.title}</Title>
-                  <Text style={{ whiteSpace: 'pre-wrap' }} dangerouslySetInnerHTML={{ __html: currentPost.text }} />
+                  <div className='post-wrapper' dangerouslySetInnerHTML={{ __html: currentPost.text }} />
                 </Stack>
               </Card>
 
@@ -322,9 +322,10 @@ export default function App() {
                     <Title order={3}>
                       {userAnswers[userAnswers.length - 1].correct ? '✅ Correct!' : '❌ Incorrect'}
                     </Title>
-                    <Text size="lg">
-                      The verdict was: <strong>{currentPost.verdict}</strong>
+                    <Text size="lg" style={{ display: 'flex', alignItems: 'center', flexDirection: 'row', gap: '6px' }}>
+                      The verdict was: <Badge variant="filled" color={currentPost.verdict === 'NTA' ? 'green' : 'red'}><strong>{currentPost.verdict}</strong></Badge>
                     </Text>
+                    <Group gap="md" justify="center" align='center'>
                     <Button 
                       component="a" 
                       href={`https://redd.it/${currentPost.id}`}
@@ -333,16 +334,17 @@ export default function App() {
                     >
                       View Original Post
                     </Button>
+                    <Button size="lg" onClick={nextPost}>
+                      {currentIndex < posts.length - 1 ? 'Next Post' : 'See Results'}
+                    </Button>
+                    </Group>
                     <Text size="sm" c="dimmed" ta="center">
                       <strong>Note:</strong> The verdict on Reddit may have changed since the data was originally retrieved.
                     </Text>
-                    <Button size="lg" onClick={nextPost} mt="md">
-                      {currentIndex < posts.length - 1 ? 'Next Post' : 'See Results'}
-                    </Button>
                   </Stack>
                 </Paper>
               )}
-              <Paper p="xl" radius="md" style={{ backgroundColor: 'white', border: '1px solid #e9ecef' }}>
+              {/* <Paper p="xl" radius="md" style={{ backgroundColor: 'white', border: '1px solid #e9ecef' }}>
                 <Text size="sm" c="dimmed" ta="center">
                   <strong>Glossary:</strong>
                   <br />
@@ -350,7 +352,7 @@ export default function App() {
                   <br />
                   <em>WIBTA:</em> Would I Be The Asshole?
                 </Text>
-              </Paper>
+              </Paper> */}
               <Footer />
             </Stack>
           </Container>
