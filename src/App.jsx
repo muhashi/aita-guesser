@@ -338,9 +338,6 @@ export default function App() {
                       {currentIndex < posts.length - 1 ? 'Next Post' : 'See Results'}
                     </Button>
                     </Group>
-                    <Text size="sm" c="dimmed" ta="center">
-                      <strong>Note:</strong> The verdict on Reddit may have changed since the data was originally retrieved.
-                    </Text>
                   </Stack>
                 </Paper>
               )}
