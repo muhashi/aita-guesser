@@ -1,0 +1,19 @@
+.hover-animate:hover {
+    transform: scale(1.05);
+    transition: transform 0.1s ease;
+}
+
+.hover-animate-color:hover {
+    transform: scale(1.2);
+    transition: transform 0.1s ease;
+}
+
+button:hover .hover-animate-right-arrow {
+    transform: translateX(3px);
+    transition: transform 0.1s ease;
+}
+
+button:hover .hover-animate-dice {
+    transform: rotate(90deg);
+    transition: transform 0.4s ease;
+}

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { MantineProvider, Container, Title, Button, Card, Text, Group, Stack, Badge, Paper, Anchor } from '@mantine/core';
+import { ActionIcon, useMantineColorScheme, useComputedColorScheme, Container, Flex, Title, Button, Card, Text, Group, Stack, Badge, Paper, Anchor } from '@mantine/core';
 import DATASET from './dataset.json';
 import ConfettiExplosion from 'react-confetti-blast';
+import { IconSun, IconMoonStars, IconArrowRight, IconDice5Filled, IconCalendarFilled } from '@tabler/icons-react';
+import './App.css';
 
 
 function shuffle(array) {
@@ -51,10 +53,28 @@ function getRandomPosts() {
   return shuffled.slice(0, 3);
 }
 
+const ColorSchemeToggle = () => {
+  const { setColorScheme } = useMantineColorScheme();
+  const computedColorScheme = useComputedColorScheme('light');
+  const dark = computedColorScheme === 'dark';
+  const toggleColorScheme = () => {
+    setColorScheme(computedColorScheme === 'dark' ? 'light' : 'dark');
+  };
+  
+  return (
+    <ActionIcon className="hover-animate-color" onClick={toggleColorScheme} size="lg" variant="default" style={{ backgroundColor: dark ? '#1a1b1c' : '#f5f5f5'}}>
+      {computedColorScheme === 'dark' ? <IconMoonStars size={18} /> : <IconSun size={18} />}
+    </ActionIcon>
+  );
+}
+
 const AnimatedTitle = () => {
+  const computedColorScheme = useComputedColorScheme('light');
+  const dark = computedColorScheme === 'dark';
   const [animate, setAnimate] = useState(false);
   const words = ['AITA', 'Guesser'];
-  const colors = ['#e55643', '#2b9f5e'];
+  const colors = [dark ? '#e35d4b' : '#e55643', dark ? '#3dcc7c' : '#2b9f5e'];
+
 
   useEffect(() => {
     setAnimate(true);
@@ -127,7 +147,7 @@ function Footer() {
       <Text size="sm" c="dimmed" ta="center">
         Game by <Anchor c="dimmed" style={{ fontWeight: 600 }} href="https://muhashi.com" target="_blank" rel="noopener noreferrer">muhashi</Anchor>.
       </Text>
-      <a href='https://ko-fi.com/D1D5V1DSF' target='_blank'>
+      <a href='https://ko-fi.com/D1D5V1DSF' target='_blank' className="hover-animate">
         <img height='36' style={{border: 0, height: '36px'}} src='https://storage.ko-fi.com/cdn/kofi6.png?v=3' alt='Buy Me a Coffee at ko-fi.com' />
       </a>
     </Group>
@@ -151,6 +171,12 @@ export default function App() {
     }
     return false;
   });
+
+  const computedColorScheme = useComputedColorScheme('light');
+  const dark = computedColorScheme === 'dark';
+
+  const correctBg = dark ? '#15663a' : '#d4edda';
+  const incorrectBg = dark ? '#8c281b' : '#f8d7da';
 
   const startGame = (mode) => {
     setGameMode(mode);
@@ -200,23 +226,26 @@ export default function App() {
 
   if (screen === 'home') {
     return (
-      <MantineProvider>
         <div style={{ 
           minHeight: '100vh', 
-          backgroundColor: '#f5f5f5',
+          backgroundColor: dark ? '#1a1b1c' : '#f5f5f5',
           padding: '20px'
         }}>
-          <Container size="sm" style={{ marginTop: '100px' }}>
+          <Container size="sm" style={{ marginTop: '65px' }}>
+            <Flex justify="flex-end">
+              <ColorSchemeToggle />
+            </Flex>
             <Stack align="center" gap="xl">
               <AnimatedTitle />
               <Text size="xl" ta="center" style={{ fontWeight: 600 }}>
-                Can you guess if the poster is the asshole?
+                Can you guess if the Redditor is the asshole?
               </Text>
               <Text size="lg" ta="center">
-                Guess the verdict for over 1000 popular r/AmItheAsshole Reddit posts.
+                Guess the verdict for popular r/AmItheAsshole Reddit posts.
               </Text>
               <Group gap="md" mt="xl" justify='center'>
                 <Button 
+                  className={dailyCompleted ? "" : "hover-animate"}
                   size="xl" 
                   onClick={() => startGame('daily')} 
                   variant="filled"
@@ -230,30 +259,31 @@ export default function App() {
                     paddingRight: '30px'
                   }}
                 >
-                  {dailyCompleted ? `Next daily in ${String(getTimeUntilNextDaily().hours)}h ${String(getTimeUntilNextDaily().minutes)}m` : '📅 Daily Challenge'}
+                  {!dailyCompleted && <IconCalendarFilled style={{ marginRight: '8px' }} />}
+                  {dailyCompleted ? `Next daily in ${String(getTimeUntilNextDaily().hours)}h ${String(getTimeUntilNextDaily().minutes)}m` : 'Daily Challenge'}
                 </Button>
                 <Button 
+                  className="hover-animate"
                   size="xl" 
                   onClick={() => startGame('quick')} 
-                  variant="outline"
-                  color="dark"
+                  variant="default"
+                  color="white"
                   style={{ 
                     boxShadow: '0 4px 14px rgba(0,0,0,0.1)',
                     fontSize: '1.1rem',
                     height: '60px',
                     paddingLeft: '30px',
                     paddingRight: '30px',
-                    backgroundColor: 'white'
                   }}
                 >
-                  🎲 Quick Play
+                  <IconDice5Filled className="hover-animate-dice" style={{ marginRight: '8px' }} />
+                  Quick Play
                 </Button>
               </Group>
               <Footer />
             </Stack>
           </Container>
         </div>
-      </MantineProvider>
     );
   }
 
@@ -261,33 +291,36 @@ export default function App() {
     const currentPost = posts[currentIndex];
     
     return (
-      <MantineProvider>
         <div style={{ 
           minHeight: '100vh', 
-          backgroundColor: '#f5f5f5',
-          padding: '20px'
+          backgroundColor: dark ? '#1a1b1c' : '#f5f5f5',
+          padding: '20px',
         }}>
           <Container size="md" style={{ marginTop: '15px' }}>
             <Stack gap="md">
               <Group justify="space-between">
-                <Badge size="lg" color="orange" variant="filled" style={{ fontSize: '0.9rem' }}>
+                <Badge size="lg" color="orange" variant="filled" style={{ fontSize: '0.9rem', userSelect: 'none' }}>
                   {gameMode === 'daily' ? '📅 Daily Challenge' : '🎲 Quick Play'}
                 </Badge>
-                <Badge size="lg" variant="filled" color="gray" style={{ fontSize: '0.9rem' }}>
-                  Post {currentIndex + 1} of 3
-                </Badge>
+                <Flex gap="md" align="center">
+                  <Badge size="lg" variant="filled" color="gray" style={{ fontSize: '0.9rem', userSelect: 'none' }}>
+                    Post {currentIndex + 1} of 3
+                  </Badge>
+                  <ColorSchemeToggle />
+                </Flex>
               </Group>
               
-              <Card shadow="md" padding="lg" pb="xs" radius="md" withBorder style={{ backgroundColor: 'white' }}>
+              <Card shadow="md" padding="lg" pb="xs" radius="md" withBorder style={{ backgroundColor: dark ? '#1a1b1c' : '#f5f5f5' }}>
                 <Stack gap="0">
-                  <Title order={2} size="h3">{currentPost.title}</Title>
-                  <div className='post-wrapper' dangerouslySetInnerHTML={{ __html: currentPost.text }} />
+                  <Title order={2} fz={{ base: 'h3', sm: 'h2' }}>{currentPost.title}</Title>
+                  <Text fz={{ base: 'md', sm: 'lg' }} dangerouslySetInnerHTML={{ __html: currentPost.text }} />
                 </Stack>
               </Card>
 
               {!showResult ? (
                 <Group justify="center" gap="xl" mt="xl">
                   <Button 
+                    className="hover-animate"
                     size="lg" 
                     color="red" 
                     onClick={() => handleGuess('YTA')}
@@ -302,6 +335,7 @@ export default function App() {
                     YTA (You're The Asshole)
                   </Button>
                   <Button 
+                    className="hover-animate"
                     size="lg" 
                     color="green" 
                     onClick={() => handleGuess('NTA')}
@@ -317,7 +351,7 @@ export default function App() {
                   </Button>
                 </Group>
               ) : (
-                <Paper p="xl" radius="md" withBorder style={{ backgroundColor: userAnswers[userAnswers.length - 1].correct ? '#d4edda' : '#f8d7da' }}>
+                <Paper p="xl" radius="md" withBorder style={{ backgroundColor: userAnswers[userAnswers.length - 1].correct ? correctBg : incorrectBg }}>
                   <Stack gap="md" align="center">
                     <Title order={3}>
                       {userAnswers[userAnswers.length - 1].correct ? '✅ Correct!' : '❌ Incorrect'}
@@ -327,6 +361,7 @@ export default function App() {
                     </Text>
                     <Group gap="md" justify="center" align='center'>
                     <Button 
+                      className="hover-animate"
                       component="a" 
                       href={`https://redd.it/${currentPost.id}`}
                       target="_blank"
@@ -334,8 +369,9 @@ export default function App() {
                     >
                       View Original Post
                     </Button>
-                    <Button size="lg" onClick={nextPost}>
-                      {currentIndex < posts.length - 1 ? 'Next Post' : 'See Results'}
+                    <Button size="lg" onClick={nextPost} className="hover-animate">
+                      {currentIndex < posts.length - 1 ? ('Next Post ') : 'See Results'}
+                      { currentIndex < posts.length - 1 && <IconArrowRight className="hover-animate-right-arrow" size={18} style={{ marginLeft: '5px' }} /> }
                     </Button>
                     </Group>
                   </Stack>
@@ -354,7 +390,6 @@ export default function App() {
             </Stack>
           </Container>
         </div>
-      </MantineProvider>
     );
   }
 
@@ -362,7 +397,7 @@ export default function App() {
     const correctCount = userAnswers.filter(a => a.correct).length;
     
     return (
-      <MantineProvider>
+      <>
         { correctCount === 3 && <ConfettiExplosion
           style={{
             position: 'absolute', top: '30vh', left: '50vw',
@@ -372,15 +407,18 @@ export default function App() {
         />}
         <div style={{ 
           minHeight: '100vh', 
-          backgroundColor: '#f5f5f5',
+          backgroundColor: dark ? '#1a1b1c' : '#f5f5f5',
           padding: '20px'
         }}>
-          <Container size="md" style={{ marginTop: '15px' }}>
+          <Container size="md" style={{ marginTop: '10px' }}>
+            <Flex justify="flex-end">
+              <ColorSchemeToggle />
+            </Flex>
             <Stack gap="xl" align="center">
-              <Title order={1} c="dark" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.1)' }}>
-                Game Complete!
+              <Title order={1}>
+                Results
               </Title>
-              <Title order={2} c="dark" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.1)' }}>
+              <Title order={2}>
                 You got {correctCount} out of 3 correct{correctCount === 3 ? ' 🎉' : ''}{correctCount === 0 ? ' 💩' : ''}
               </Title>
 
@@ -388,23 +426,25 @@ export default function App() {
               
               <Stack gap="md" style={{ width: '100%' }}>
                 {userAnswers.map((answer, idx) => (
-                  <Card key={idx} shadow="md" padding="lg" radius="md" withBorder style={{ backgroundColor: 'white' }}>
+                  <Card key={idx} shadow="md" padding="lg" radius="md" withBorder style={{ backgroundColor: dark ? '#1a1b1c' : '#f5f5f5' }}>
                     <Group justify="space-between" align="flex-start">
                       <div style={{ flex: 1 }}>
                         <Anchor 
                           href={`https://redd.it/${answer.post.id}`}
                           target="_blank"
-                          c="dark"
+                          c={dark ? 'white' : 'dark'}
                           style={{ textDecoration: 'none' }}
                         >
-                          <Text fw={500} style={{ textDecoration: 'underline' }}>{answer.post.title}</Text>
+                          <Text fw={500} style={{ textDecoration: 'underline' }} fz={{ base: 'md', sm: 'lg' }}>
+                            {answer.post.title}
+                          </Text>
                         </Anchor>
                       </div>
                       <Badge color={answer.correct ? 'green' : 'red'}>
                         {answer.correct ? '✅ Correct' : '❌ Wrong'}
                       </Badge>
                     </Group>
-                    <Text size="sm" c="dimmed" mt="xs">
+                    <Text size="sm" c={dark ? 'white' : 'dark'} mt="xs">
                       Your guess: {answer.guess} | Actual: {answer.post.verdict}
                     </Text>
                   </Card>
@@ -415,6 +455,7 @@ export default function App() {
                 {gameMode === 'daily' ? (
                   <>
                     <Button 
+                      className="hover-animate"
                       size="lg" 
                       onClick={shareResults} 
                       variant="filled"
@@ -427,6 +468,7 @@ export default function App() {
                       {copied ? '✓ Copied!' : 'Share Results'}
                     </Button>
                     <Button 
+                      className="hover-animate"
                       size="lg" 
                       onClick={() => startGame('quick')} 
                       variant="outline"
@@ -443,6 +485,7 @@ export default function App() {
                 ) : (
                   <>
                     <Button 
+                      className="hover-animate"
                       size="lg" 
                       onClick={() => startGame('quick')}
                       variant="filled"
@@ -455,6 +498,7 @@ export default function App() {
                       Play Again
                     </Button>
                     <Button 
+                      className="hover-animate"
                       size="lg" 
                       onClick={() => setScreen('home')} 
                       variant="outline"
@@ -465,7 +509,7 @@ export default function App() {
                         backgroundColor: 'white'
                       }}
                     >
-                      Back to Home
+                      Home
                     </Button>
                   </>
                 )}
@@ -474,7 +518,7 @@ export default function App() {
             </Stack>
           </Container>
         </div>
-      </MantineProvider>
+      </>
     );
   }
 }
