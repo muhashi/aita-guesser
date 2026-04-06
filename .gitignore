@@ -25,3 +25,4 @@ dist-ssr
 
 test.json
 update-dataset.js
+validate.js
