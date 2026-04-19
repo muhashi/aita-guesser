@@ -383,15 +383,6 @@ export default function App() {
                 </Stack>
               </Paper>
             )}
-            {/* <Paper p="xl" radius="md" style={{ backgroundColor: 'white', border: '1px solid #e9ecef' }}>
-                <Text size="sm" c="dimmed" ta="center">
-                  <strong>Glossary:</strong>
-                  <br />
-                  <em>AITA:</em> Am I The Asshole?
-                  <br />
-                  <em>WIBTA:</em> Would I Be The Asshole?
-                </Text>
-              </Paper> */}
             <Footer />
           </Stack>
         </Container>
