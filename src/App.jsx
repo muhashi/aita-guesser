@@ -179,7 +179,7 @@ export default function App() {
   const verdictsLoaded = use(verdicts);
 
   const correctBg = dark ? '#15663a' : '#d4edda';
-  const incorrectBg = dark ? '#8c281b' : '#f8d7da';
+  const incorrectBg = dark ? '#852c31' : '#f8d7da';
 
   const startGame = (mode) => {
     setGameMode(mode);
