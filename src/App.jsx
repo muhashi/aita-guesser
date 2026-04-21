@@ -176,7 +176,8 @@ export default function App() {
 
   const computedColorScheme = useComputedColorScheme('light');
   const dark = computedColorScheme === 'dark';
-  const verdictsLoaded = use(verdicts);
+  const verdictsUse = use(verdicts);
+  const verdictsLoaded = verdictsUse.default ?? verdictsUse;
 
   const correctBg = dark ? '#15663a' : '#d4edda';
   const incorrectBg = dark ? '#852c31' : '#f8d7da';
