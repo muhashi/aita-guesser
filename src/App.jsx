@@ -304,7 +304,7 @@ export default function App() {
           <Stack gap="md">
             <Group justify="space-between">
               <Badge size="lg" color="orange" variant="filled" style={{ fontSize: '0.9rem', userSelect: 'none' }}>
-                {gameMode === 'daily' ? '📅 Daily Challenge' : '🎲 Quick Play'}
+                {gameMode === 'daily' ?  '📅 Daily Game' : '🎲 Quick Play'}
               </Badge>
               <Flex gap="md" align="center">
                 <Badge size="lg" variant="filled" color="gray" style={{ fontSize: '0.9rem', userSelect: 'none' }}>
