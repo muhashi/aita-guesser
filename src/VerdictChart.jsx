@@ -1,7 +1,8 @@
 import { Chart, registerables } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import React, { useEffect, Suspense, useRef } from 'react';
-import { Alert, Text, Stack, useComputedColorScheme } from '@mantine/core';
+import { Alert, Text, Stack, useComputedColorScheme, Tooltip, Group } from '@mantine/core';
+import { IconInfoCircle } from '@tabler/icons-react';
 Chart.register(...registerables);
 Chart.register(ChartDataLabels);
 
@@ -28,14 +29,14 @@ export default function VerdictChart({ postId, verdicts }) {
   const dark = computedColorScheme === 'dark';
   const labelColor = dark ? '#c9c9c9' : '#000000';
   const COLORS = dark ? VERDICT_COLORS_DARK : VERDICT_COLORS;
-  const verdictsDontMatch = verdictData && verdictData.labelledVerdict !== verdictData.crowdVerdict;
+  const verdictsDontMatch = verdictData && verdictData.labelledVerdict !== verdictData.crowdVerdictByScore;
 
   useEffect(() => {
     if (!verdictData || !chartRef.current) return;
 
     chartInstance.current?.destroy();
 
-    const counts = verdictData.commentCounts;
+    const counts = verdictData.scoreSums;
     const labels = ['YTA', 'NTA', 'ESH', 'NAH'].filter(l => counts[l] > 0 || l === "NTA" || l === "YTA"); // Always show YTA/NTA even if 0 votes
     const values = labels.map(l => counts[l]);
 
@@ -49,6 +50,7 @@ export default function VerdictChart({ postId, verdicts }) {
           borderColor: labels.map(l => COLORS[l]),
           borderWidth: 1,
           borderRadius: 4,
+          minBarLength: 3,
         }]
       },
       options: {
@@ -56,7 +58,7 @@ export default function VerdictChart({ postId, verdicts }) {
         maintainAspectRatio: false,
         plugins: {
           legend: { display: false },
-          tooltip: { callbacks: { label: ctx => ` ${ctx.parsed.y} votes` } },
+          tooltip: { callbacks: { label: ctx => ` ${ctx.parsed.y} ${ctx.parsed.y >= 0 ? 'upvotes' : 'downvotes'}` } },
           datalabels: {
             color: dark ? '#FFF' : '#000',
             anchor: 'end',
@@ -84,8 +86,20 @@ export default function VerdictChart({ postId, verdicts }) {
 
   return (
     <Stack gap="xs" mt="md">
-      <Text size="sm" ta="center">How Reddit voted ({verdictData.totalVerdictComments} votes)</Text>
-      <div style={{ position: 'relative', width: '100%', height: '200px' }}>
+      <Group justify="center" gap="4px">
+        <Text size="sm" ta="center">
+          How Reddit voted
+        </Text>
+        <Tooltip
+          label="Total upvotes by verdict type, based on comment votes"
+          withArrow
+          color="gray.7"
+          position="top"
+        >
+          <IconInfoCircle size={16} style={{ cursor: 'pointer' }} />
+        </Tooltip>
+      </Group>
+      <div style={{ position: 'relative', height: '200px' }}>
         <canvas
           ref={chartRef}
           role="img"

@@ -477,7 +477,7 @@ export default function App() {
                         backgroundColor: 'white'
                       }}
                     >
-                      Play Quick Mode
+                      Quick Play
                     </Button>
                   </>
                 ) : (
