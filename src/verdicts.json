@@ -9372,7 +9372,7 @@
     },
     "scoreSums": {
       "YTA": 12681,
-      "NTA": 2655,
+      "NTA": 14455,
       "ESH": 330,
       "NAH": 672,
       "ambiguous": 0,
@@ -22950,6 +22950,121 @@
     },
     "totalVerdictComments": 32,
     "totalScore": 458,
+    "crowdVerdict": "NTA",
+    "crowdVerdictByScore": "NTA"
+  },
+  "d5iqnh": {
+    "labelledVerdict": "NTA",
+    "commentCounts": {
+      "YTA": 17,
+      "NTA": 29,
+      "ESH": 5,
+      "NAH": 2,
+      "ambiguous": 4,
+      "noVerdict": 15
+    },
+    "scoreSums": {
+      "YTA": 2280,
+      "NTA": 5360,
+      "ESH": 590,
+      "NAH": 16,
+      "ambiguous": 366,
+      "noVerdict": 4643
+    },
+    "totalVerdictComments": 53,
+    "totalScore": 8246,
+    "crowdVerdict": "NTA",
+    "crowdVerdictByScore": "NTA"
+  },
+  "ccj0uf": {
+    "labelledVerdict": "YTA",
+    "commentCounts": {
+      "YTA": 39,
+      "NTA": 12,
+      "ESH": 0,
+      "NAH": 30,
+      "ambiguous": 3,
+      "noVerdict": 13
+    },
+    "scoreSums": {
+      "YTA": 2121,
+      "NTA": -10,
+      "ESH": 0,
+      "NAH": 131,
+      "ambiguous": 38,
+      "noVerdict": 25
+    },
+    "totalVerdictComments": 81,
+    "totalScore": 2242,
+    "crowdVerdict": "YTA",
+    "crowdVerdictByScore": "YTA"
+  },
+  "fpokm9": {
+    "labelledVerdict": "NTA",
+    "commentCounts": {
+      "YTA": 20,
+      "NTA": 37,
+      "ESH": 2,
+      "NAH": 9,
+      "ambiguous": 1,
+      "noVerdict": 22
+    },
+    "scoreSums": {
+      "YTA": 1210,
+      "NTA": 1486,
+      "ESH": -5,
+      "NAH": 215,
+      "ambiguous": -3,
+      "noVerdict": 856
+    },
+    "totalVerdictComments": 68,
+    "totalScore": 2906,
+    "crowdVerdict": "NTA",
+    "crowdVerdictByScore": "NTA"
+  },
+  "bj6su9": {
+    "labelledVerdict": "YTA",
+    "commentCounts": {
+      "YTA": 111,
+      "NTA": 0,
+      "ESH": 0,
+      "NAH": 0,
+      "ambiguous": 1,
+      "noVerdict": 10
+    },
+    "scoreSums": {
+      "YTA": 11546,
+      "NTA": 0,
+      "ESH": 0,
+      "NAH": 0,
+      "ambiguous": 1,
+      "noVerdict": 1396
+    },
+    "totalVerdictComments": 111,
+    "totalScore": 11546,
+    "crowdVerdict": "YTA",
+    "crowdVerdictByScore": "YTA"
+  },
+  "djpun8": {
+    "labelledVerdict": "NTA",
+    "commentCounts": {
+      "YTA": 7,
+      "NTA": 15,
+      "ESH": 0,
+      "NAH": 0,
+      "ambiguous": 0,
+      "noVerdict": 6
+    },
+    "scoreSums": {
+      "YTA": 16455,
+      "NTA": 20963,
+      "ESH": 0,
+      "NAH": 0,
+      "ambiguous": 0,
+      "noVerdict": 1304
+    },
+    "totalVerdictComments": 22,
+    "totalScore": 37418,
     "crowdVerdict": "NTA",
     "crowdVerdictByScore": "NTA"
   }
