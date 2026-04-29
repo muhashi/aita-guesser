@@ -23067,5 +23067,28 @@
     "totalScore": 37418,
     "crowdVerdict": "NTA",
     "crowdVerdictByScore": "NTA"
+  },
+  "jf897w": {
+    "labelledVerdict": "YTA",
+    "commentCounts": {
+      "YTA": 31,
+      "NTA": 24,
+      "ESH": 0,
+      "NAH": 5,
+      "ambiguous": 1,
+      "noVerdict": 7
+    },
+    "scoreSums": {
+      "YTA": 356,
+      "NTA": 325,
+      "ESH": 0,
+      "NAH": 0,
+      "ambiguous": 3,
+      "noVerdict": 7
+    },
+    "totalVerdictComments": 60,
+    "totalScore": 681,
+    "crowdVerdict": "YTA",
+    "crowdVerdictByScore": "YTA"
   }
 }

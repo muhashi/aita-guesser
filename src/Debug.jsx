@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, NumberInput, Title, Button, Card, Text, Group, Stack, Badge, Paper, Anchor } from '@mantine/core';
+import { Container, NumberInput, TextInput, Title, Button, Card, Text, Group, Stack, Badge, Paper, Anchor } from '@mantine/core';
 import DATASET from './dataset.json';
 import { IconArrowRight } from '@tabler/icons-react';
 import './App.css';
@@ -7,6 +7,7 @@ import './App.css';
 // Just to make sure posts display correctly
 const Debug = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [currentPostId, setCurrentPostId] = useState(DATASET[0].id);
     const currentPost = DATASET[currentIndex];
     const dark = true;
     const showResult = true;
@@ -23,9 +24,19 @@ const Debug = () => {
                 <Badge size="lg" color="orange" variant="filled" style={{ fontSize: '0.9rem', userSelect: 'none' }}>
                   🎲 Quick Play
                 </Badge>
-                <Badge size="lg" variant="filled" color="gray" style={{ fontSize: '0.9rem', userSelect: 'none' }}>
-                Post <NumberInput value={currentIndex + 1} onChange={(value) => setCurrentIndex(Math.max(0, Math.min(value - 1, DATASET.length - 1)))} /> of {DATASET.length}
-                </Badge>
+                <TextInput value={currentPostId} onChange={(evt) => {
+                  const value = evt.target.value;
+                  const index = DATASET.findIndex(post => post.id === value);
+                  if (index !== -1) {
+                    setCurrentIndex(index);
+                  }
+                  setCurrentPostId(value);
+                }} />
+                <NumberInput value={currentIndex + 1} onChange={(value) => {
+                  const newIndex = Math.max(0, Math.min(value - 1, DATASET.length - 1));
+                  setCurrentIndex(newIndex);
+                  setCurrentPostId(DATASET[newIndex].id);
+                }} />
               </Group>
               
               <Card shadow="md" padding="lg" pb="xs" radius="md" withBorder style={{ backgroundColor: dark ? '#1a1b1c' : '#f5f5f5' }}>
