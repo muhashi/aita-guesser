@@ -23090,5 +23090,396 @@
     "totalScore": 681,
     "crowdVerdict": "YTA",
     "crowdVerdictByScore": "YTA"
+  },
+  "br7qmj": {
+    "labelledVerdict": "NTA",
+    "commentCounts": {
+      "YTA": 14,
+      "NTA": 20,
+      "ESH": 1,
+      "NAH": 15,
+      "ambiguous": 6,
+      "noVerdict": 18
+    },
+    "scoreSums": {
+      "YTA": 583,
+      "NTA": 931,
+      "ESH": 1,
+      "NAH": 400,
+      "ambiguous": 792,
+      "noVerdict": 104
+    },
+    "totalVerdictComments": 49,
+    "totalScore": 1163,
+    "crowdVerdict": "NTA",
+    "crowdVerdictByScore": "YTA"
+  },
+  "rvh4a0": {
+    "labelledVerdict": "YTA",
+    "commentCounts": {
+      "YTA": 6,
+      "NTA": 78,
+      "ESH": 0,
+      "NAH": 7,
+      "ambiguous": 1,
+      "noVerdict": 22
+    },
+    "scoreSums": {
+      "YTA": 1945,
+      "NTA": 1609,
+      "ESH": 0,
+      "NAH": 42,
+      "ambiguous": 1,
+      "noVerdict": 25
+    },
+    "totalVerdictComments": 91,
+    "totalScore": 3596,
+    "crowdVerdict": "NTA",
+    "crowdVerdictByScore": "YTA"
+  },
+  "pizbv4": {
+    "labelledVerdict": "YTA",
+    "commentCounts": {
+      "YTA": 36,
+      "NTA": 18,
+      "ESH": 0,
+      "NAH": 10,
+      "ambiguous": 1,
+      "noVerdict": 16
+    },
+    "scoreSums": {
+      "YTA": 853,
+      "NTA": 312,
+      "ESH": 0,
+      "NAH": 397,
+      "ambiguous": 67,
+      "noVerdict": 20
+    },
+    "totalVerdictComments": 64,
+    "totalScore": 1562,
+    "crowdVerdict": "YTA",
+    "crowdVerdictByScore": "YTA"
+  },
+  "c6wsx5": {
+    "labelledVerdict": "YTA",
+    "commentCounts": {
+      "YTA": 22,
+      "NTA": 34,
+      "ESH": 1,
+      "NAH": 7,
+      "ambiguous": 1,
+      "noVerdict": 13
+    },
+    "scoreSums": {
+      "YTA": 679,
+      "NTA": 311,
+      "ESH": -3,
+      "NAH": 16,
+      "ambiguous": 1,
+      "noVerdict": 63
+    },
+    "totalVerdictComments": 64,
+    "totalScore": 1003,
+    "crowdVerdict": "NTA",
+    "crowdVerdictByScore": "YTA"
+  },
+  "d428ap": {
+    "labelledVerdict": "NTA",
+    "commentCounts": {
+      "YTA": 12,
+      "NTA": 12,
+      "ESH": 5,
+      "NAH": 5,
+      "ambiguous": 4,
+      "noVerdict": 12
+    },
+    "scoreSums": {
+      "YTA": 173,
+      "NTA": 516,
+      "ESH": 7,
+      "NAH": 53,
+      "ambiguous": 5,
+      "noVerdict": 79
+    },
+    "totalVerdictComments": 34,
+    "totalScore": 749,
+    "crowdVerdict": "YTA",
+    "crowdVerdictByScore": "YTA"
+  },
+  "gv3uln": {
+    "labelledVerdict": "YTA",
+    "commentCounts": {
+      "YTA": 41,
+      "NTA": 5,
+      "ESH": 2,
+      "NAH": 5,
+      "ambiguous": 0,
+      "noVerdict": 16
+    },
+    "scoreSums": {
+      "YTA": 3062,
+      "NTA": -81,
+      "ESH": -69,
+      "NAH": -26,
+      "ambiguous": 0,
+      "noVerdict": 89
+    },
+    "totalVerdictComments": 53,
+    "totalScore": 2886,
+    "crowdVerdict": "YTA",
+    "crowdVerdictByScore": "YTA"
+  },
+  "i33dks": {
+    "labelledVerdict": "YTA",
+    "commentCounts": {
+      "YTA": 16,
+      "NTA": 12,
+      "ESH": 6,
+      "NAH": 1,
+      "ambiguous": 0,
+      "noVerdict": 5
+    },
+    "scoreSums": {
+      "YTA": 1720,
+      "NTA": -8,
+      "ESH": 113,
+      "NAH": 7,
+      "ambiguous": 0,
+      "noVerdict": 3
+    },
+    "totalVerdictComments": 35,
+    "totalScore": 1832,
+    "crowdVerdict": "YTA",
+    "crowdVerdictByScore": "YTA"
+  },
+  "emqk29": {
+    "labelledVerdict": "NTA",
+    "commentCounts": {
+      "YTA": 15,
+      "NTA": 24,
+      "ESH": 6,
+      "NAH": 5,
+      "ambiguous": 3,
+      "noVerdict": 21
+    },
+    "scoreSums": {
+      "YTA": 1619,
+      "NTA": 3447,
+      "ESH": 35,
+      "NAH": 238,
+      "ambiguous": 5,
+      "noVerdict": 2687
+    },
+    "totalVerdictComments": 50,
+    "totalScore": 5339,
+    "crowdVerdict": "NTA",
+    "crowdVerdictByScore": "NTA"
+  },
+  "kj08mw": {
+    "labelledVerdict": "NTA",
+    "commentCounts": {
+      "YTA": 14,
+      "NTA": 11,
+      "ESH": 1,
+      "NAH": 24,
+      "ambiguous": 2,
+      "noVerdict": 19
+    },
+    "scoreSums": {
+      "YTA": 818,
+      "NTA": 4844,
+      "ESH": 7,
+      "NAH": 1724,
+      "ambiguous": 100,
+      "noVerdict": 1069
+    },
+    "totalVerdictComments": 50,
+    "totalScore": 7393,
+    "crowdVerdict": "NAH",
+    "crowdVerdictByScore": "NTA"
+  },
+  "scih2o": {
+    "labelledVerdict": "YTA",
+    "commentCounts": {
+      "YTA": 42,
+      "NTA": 9,
+      "ESH": 2,
+      "NAH": 3,
+      "ambiguous": 2,
+      "noVerdict": 11
+    },
+    "scoreSums": {
+      "YTA": 1311,
+      "NTA": -84,
+      "ESH": -18,
+      "NAH": -9,
+      "ambiguous": -16,
+      "noVerdict": 62
+    },
+    "totalVerdictComments": 56,
+    "totalScore": 1200,
+    "crowdVerdict": "YTA",
+    "crowdVerdictByScore": "YTA"
+  },
+  "s1qede": {
+    "labelledVerdict": "YTA",
+    "commentCounts": {
+      "YTA": 24,
+      "NTA": 23,
+      "ESH": 0,
+      "NAH": 0,
+      "ambiguous": 2,
+      "noVerdict": 15
+    },
+    "scoreSums": {
+      "YTA": 495,
+      "NTA": 70,
+      "ESH": 0,
+      "NAH": 0,
+      "ambiguous": 4,
+      "noVerdict": 78
+    },
+    "totalVerdictComments": 47,
+    "totalScore": 565,
+    "crowdVerdict": "YTA",
+    "crowdVerdictByScore": "YTA"
+  },
+  "g0yog3": {
+    "labelledVerdict": "YTA",
+    "commentCounts": {
+      "YTA": 80,
+      "NTA": 1,
+      "ESH": 0,
+      "NAH": 0,
+      "ambiguous": 0,
+      "noVerdict": 9
+    },
+    "scoreSums": {
+      "YTA": 3224,
+      "NTA": -24,
+      "ESH": 0,
+      "NAH": 0,
+      "ambiguous": 0,
+      "noVerdict": 95
+    },
+    "totalVerdictComments": 81,
+    "totalScore": 3200,
+    "crowdVerdict": "YTA",
+    "crowdVerdictByScore": "YTA"
+  },
+  "b9rjq6": {
+    "labelledVerdict": "YTA",
+    "commentCounts": {
+      "YTA": 15,
+      "NTA": 5,
+      "ESH": 0,
+      "NAH": 1,
+      "ambiguous": 1,
+      "noVerdict": 11
+    },
+    "scoreSums": {
+      "YTA": 333,
+      "NTA": 36,
+      "ESH": 0,
+      "NAH": 1,
+      "ambiguous": 1,
+      "noVerdict": 15
+    },
+    "totalVerdictComments": 21,
+    "totalScore": 370,
+    "crowdVerdict": "YTA",
+    "crowdVerdictByScore": "YTA"
+  },
+  "il9xzh": {
+    "labelledVerdict": "YTA",
+    "commentCounts": {
+      "YTA": 103,
+      "NTA": 7,
+      "ESH": 3,
+      "NAH": 0,
+      "ambiguous": 2,
+      "noVerdict": 34
+    },
+    "scoreSums": {
+      "YTA": 2755,
+      "NTA": 11,
+      "ESH": 6,
+      "NAH": 0,
+      "ambiguous": 28,
+      "noVerdict": 156
+    },
+    "totalVerdictComments": 113,
+    "totalScore": 2772,
+    "crowdVerdict": "YTA",
+    "crowdVerdictByScore": "YTA"
+  },
+  "kd0u60": {
+    "labelledVerdict": "YTA",
+    "commentCounts": {
+      "YTA": 23,
+      "NTA": 14,
+      "ESH": 4,
+      "NAH": 3,
+      "ambiguous": 2,
+      "noVerdict": 8
+    },
+    "scoreSums": {
+      "YTA": 2058,
+      "NTA": 335,
+      "ESH": 500,
+      "NAH": 45,
+      "ambiguous": 11,
+      "noVerdict": 2
+    },
+    "totalVerdictComments": 44,
+    "totalScore": 2938,
+    "crowdVerdict": "YTA",
+    "crowdVerdictByScore": "YTA"
+  },
+  "b1zzso": {
+    "labelledVerdict": "NTA",
+    "commentCounts": {
+      "YTA": 30,
+      "NTA": 19,
+      "ESH": 1,
+      "NAH": 6,
+      "ambiguous": 6,
+      "noVerdict": 15
+    },
+    "scoreSums": {
+      "YTA": 421,
+      "NTA": 664,
+      "ESH": 3,
+      "NAH": 259,
+      "ambiguous": 27,
+      "noVerdict": 1868
+    },
+    "totalVerdictComments": 56,
+    "totalScore": 1347,
+    "crowdVerdict": "YTA",
+    "crowdVerdictByScore": "NTA"
+  },
+  "rtjigj": {
+    "labelledVerdict": "YTA",
+    "commentCounts": {
+      "YTA": 45,
+      "NTA": 4,
+      "ESH": 2,
+      "NAH": 0,
+      "ambiguous": 1,
+      "noVerdict": 12
+    },
+    "scoreSums": {
+      "YTA": 2188,
+      "NTA": -24,
+      "ESH": -12,
+      "NAH": 0,
+      "ambiguous": -3,
+      "noVerdict": 324
+    },
+    "totalVerdictComments": 51,
+    "totalScore": 2152,
+    "crowdVerdict": "YTA",
+    "crowdVerdictByScore": "YTA"
   }
 }
