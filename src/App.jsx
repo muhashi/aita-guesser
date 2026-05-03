@@ -336,7 +336,7 @@ export default function App() {
                     paddingRight: '30px'
                   }}
                 >
-                  YTA (You're The Asshole)
+                  You're The Asshole
                 </Button>
                 <Button
                   className="hover-animate"
@@ -351,7 +351,7 @@ export default function App() {
                     paddingRight: '30px'
                   }}
                 >
-                  NTA (Not The Asshole)
+                  Not The Asshole
                 </Button>
               </Group>
             ) : (
